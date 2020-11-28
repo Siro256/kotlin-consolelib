@@ -1,0 +1,40 @@
+name: "Deploy Nexus"
+on:
+  push:
+    branches:
+      - develop
+  release:
+    types: [published, edit]
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: "Build project"
+    runs-on: self-hosted
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v2
+
+      - name: "Validate gradle"
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: "Build with Gradle"
+        run: "./gradlew build"
+
+  deploy:
+    needs: build
+    name: "Deploy on nexus"
+    runs-on: self-hosted
+    steps:
+      - name: "Deploy on nexus"
+        run: "./gradlew publish -Dusername=${{ secrets.NEXUS_USER }} -Dpassword=${{  secrets.NEXUS_PASSWORD }}"
+
+  cleanup:
+    needs: deploy
+    name: "Cleanup workspace"
+    runs-on: self-hosted
+    steps:
+      - name: "Cleanup"
+        run: "rm -rf ${{ github.workspace }}"
