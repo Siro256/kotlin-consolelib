@@ -1,2 +1,2 @@
-rootProject.name = "ConsoleLib"
+rootProject.name = "kotlin-consolelib"
 
