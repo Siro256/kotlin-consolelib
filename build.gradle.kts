@@ -1,3 +1,4 @@
+import java.net.URL
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -7,7 +8,7 @@ plugins {
     signing
 }
 
-group = "dev.siro256.kotlin.consolelib"
+group = "dev.siro256"
 version = "1.0.0-SNAPSHOT"
 description = "A console library for Kotlin(JVM language)"
 val projectLocation = "Sirrrrrro/kotlin-consolelib"
@@ -44,10 +45,36 @@ tasks{
 
     dokkaJavadoc {
         outputDirectory.set(buildDir.resolve("dokkaJavadoc"))
+        dokkaSourceSets.configureEach {
+            includeNonPublic.set(true)
+            sourceLink {
+                localDirectory.set(file("src/main/kotlin"))
+                remoteUrl.set(URL(
+                    if (version.toString().endsWith("SNAPSHOT", true))
+                        "https://github.com/$projectLocation/blob/develop/src/main/kotlin/" else
+                        "https://github.com/$projectLocation/blob/master/src/main/kotlin/"
+                )
+                )
+                remoteLineSuffix.set("#L")
+            }
+        }
     }
 
     dokkaHtml {
         outputDirectory.set(buildDir.resolve("dokkaHtml"))
+        dokkaSourceSets.configureEach {
+            includeNonPublic.set(true)
+            sourceLink {
+                localDirectory.set(file("src/main/kotlin"))
+                remoteUrl.set(URL(
+                    if (version.toString().endsWith("SNAPSHOT", true))
+                        "https://github.com/$projectLocation/blob/develop/src/main/kotlin/" else
+                        "https://github.com/$projectLocation/blob/master/src/main/kotlin/"
+                )
+                )
+                remoteLineSuffix.set("#L")
+            }
+        }
     }
 
     val sourcesJar by creating(Jar::class) {
@@ -108,8 +135,8 @@ publishing {
         maven {
             url = uri(
                 if (version.toString().endsWith("SNAPSHOT", true))
-                    "https://maven.siro256.dev/repository/maven-releases/" else
-                    "https://maven.siro256.dev/repository/maven-snapshots/"
+                    "https://maven.siro256.dev/repository/maven-snapshots/" else
+                    "https://maven.siro256.dev/repository/maven-releases/"
             )
 
             credentials {
