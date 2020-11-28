@@ -5,30 +5,45 @@ import java.util.*
 
 /**
  * ライブラリの基本クラス  使用できる関数が全てここにある
+ *
+ * @author Siro_256
+ * @since 1.0.0
  */
 
 @Suppress("ReplaceJavaStaticMethodWithKotlinAnalog")
 object Console {
     /**
      * 処理を実行する[CoroutineScope]
+     *
+     * @author Siro_256
+     * @since 1.0.0
      */
 
     private val coroutine = CoroutineScope(Dispatchers.IO)
 
     /**
      * すでに初期化されているか否かを判定するための変数
+     *
+     * @author Siro_256
+     * @since 1.0.0
      */
 
     private var initialized = false
 
     /**
      * 入力待ちの時に表示される文字列  デフォルトは「>」
+     *
+     * @author Siro_256
+     * @since 1.0.0
      */
 
     var prefix = ">"
 
     /**
      * 初期化する関数  プログラムの最初に実行する必要がある
+     *
+     * @author Siro_256
+     * @since 1.0.0
      */
 
     fun initialize() {
@@ -45,6 +60,9 @@ object Console {
 
     /**
      * 改行を出力する
+     *
+     * @author Siro_256
+     * @since 1.0.0
      */
 
     fun println() {
@@ -56,6 +74,9 @@ object Console {
     /**
      * [Boolean]値を出力し、改行する
      * @param message [Boolean]型のメッセージ
+     *
+     * @author Siro_256
+     * @since 1.0.0
      */
 
     fun println(message: Boolean) {
@@ -67,6 +88,9 @@ object Console {
     /**
      * [Char]値を出力し、改行する
      * @param message [Char]型のメッセージ
+     *
+     * @author Siro_256
+     * @since 1.0.0
      */
 
     fun println(message: Char) {
@@ -78,6 +102,9 @@ object Console {
     /**
      * [Int]値を出力し、改行する
      * @param message [Int]型のメッセージ
+     *
+     * @author Siro_256
+     * @since 1.0.0
      */
 
     fun println(message: Int) {
@@ -89,6 +116,9 @@ object Console {
     /**
      * [Long]値を出力し、改行する
      * @param message [Long]型のメッセージ
+     *
+     * @author Siro_256
+     * @since 1.0.0
      */
 
     fun println(message: Long) {
@@ -100,6 +130,9 @@ object Console {
     /**
      * [Float]値を出力し、改行する
      * @param message [Float]型のメッセージ
+     *
+     * @author Siro_256
+     * @since 1.0.0
      */
 
     fun println(message: Float) {
@@ -111,6 +144,9 @@ object Console {
     /**
      * [Double]値を出力し、改行する
      * @param message [Double]型のメッセージ
+     *
+     * @author Siro_256
+     * @since 1.0.0
      */
 
     fun println(message: Double) {
@@ -122,6 +158,9 @@ object Console {
     /**
      * [CharArray]値を出力し、改行する
      * @param message [CharArray]型のメッセージ
+     *
+     * @author Siro_256
+     * @since 1.0.0
      */
 
     fun println(message: CharArray) {
@@ -133,6 +172,9 @@ object Console {
     /**
      * [String]値を出力し、改行する
      * @param message [String]型のメッセージ
+     *
+     * @author Siro_256
+     * @since 1.0.0
      */
 
     fun println(message: String) {
@@ -144,6 +186,9 @@ object Console {
     /**
      * [Any]値を出力し、改行する
      * @param message [Any]型のメッセージ
+     *
+     * @author Siro_256
+     * @since 1.0.0
      */
 
     fun println(message: Any) {
