@@ -196,4 +196,21 @@ object Console {
             System.out.print("\u001B[2K]\u001B[0G$message\n$prefix")
         }
     }
+
+    /**
+     * 通常のコンソールの処理に割り込み、入力した値を取得する
+     * @return 入力された値
+     * 
+     * @author Siro_256
+     * @since 1.1.0
+     */
+
+    suspend fun readLine(): String? {
+        var input: String? = ""
+        coroutine.launch {
+            input = Scanner(System.`in`).nextLine()
+            System.out.println(prefix)
+        }.join()
+        return input
+    }
 }

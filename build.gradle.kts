@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "dev.siro256"
-version = "1.0.0"
+version = "1.1.0-SNAPSHOT"
 description = "A console library for Kotlin(JVM language)"
 val projectLocation = "Sirrrrrro/kotlin-consolelib"
 
