@@ -21,8 +21,8 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0-M1")
     implementation("dev.siro256:kotlin-eventlib:1.0.0-SNAPSHOT")
-    dokkaJavadocPlugin("org.jetbrains.dokka:javadoc-plugin:1.4.10.2")
-    dokkaHtmlPlugin("org.jetbrains.dokka:dokka-base:1.4.10.2")
+    dokkaJavadocPlugin("org.jetbrains.dokka:javadoc-plugin:1.4.32")
+    dokkaHtmlPlugin("org.jetbrains.dokka:dokka-base:1.4.32")
 }
 
 configurations.all {
