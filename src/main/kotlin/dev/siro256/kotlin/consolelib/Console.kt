@@ -205,12 +205,12 @@ object Console {
      * @since 1.1.0
      */
 
-    suspend fun readLine(): String? {
+    fun readLine(): String? {
         var input: String? = ""
-        coroutine.launch {
+        runBlocking(coroutine.coroutineContext) {
             input = Scanner(System.`in`).nextLine()
             System.out.println(prefix)
-        }.join()
+        }
         return input
     }
 }
