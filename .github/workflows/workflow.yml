@@ -29,7 +29,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: "Deploy on nexus"
-        run: "./gradlew publish -Dusername=${{ secrets.NEXUS_USER }} -Dpassword=${{  secrets.NEXUS_PASSWORD }} --stacktrace"
+        run: "./gradlew publish -Dusername=${{ secrets.NEXUS_USER }} -Dpassword=${{ secrets.NEXUS_PASSWORD }} --stacktrace"
 
   cleanup:
     needs: deploy
