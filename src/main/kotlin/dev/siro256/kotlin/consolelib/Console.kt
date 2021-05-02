@@ -32,6 +32,15 @@ object Console {
     private var initialized = false
 
     /**
+     * readLine関数が実行中か否かを判定するための変数
+     *
+     * @author Siro_256
+     * @since 1.1.0
+     */
+
+    private var readingAnother = false
+
+    /**
      * 入力待ちの時に表示される文字列  デフォルトは「>」
      *
      * @author Siro_256
@@ -54,7 +63,7 @@ object Console {
             val buffer = BufferedReader(InputStreamReader(System.`in`))
             System.out.print(prefix)
             while (true) {
-                if (!buffer.ready()) {
+                if (!buffer.ready() || readingAnother) {
                     delay(100)
                     continue
                 }
@@ -215,8 +224,10 @@ object Console {
     fun readLine(): String? {
         var input: String?
         runBlocking(coroutine.coroutineContext) {
+            readingAnother = true
             input = kotlin.io.readLine()
             System.out.println(prefix)
+            readingAnother = false
         }
         return input
     }
