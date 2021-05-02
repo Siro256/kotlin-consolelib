@@ -215,17 +215,18 @@ object Console {
      */
 
     fun readLine(): String? {
+        System.out.println("TestMessage1")
         var input: String?
 
         inputCoroutine?.cancel()
-
-        runBlocking(coroutine.coroutineContext) {
+        System.out.println("TestMessage2")
+        runBlocking {
             input = Scanner(System.`in`).nextLine()
             System.out.println(prefix)
         }
-
+        System.out.println("TestMessage3")
         inputCoroutine?.start()
-
+        System.out.println("TestMessage4")
         return input
     }
 }
