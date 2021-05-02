@@ -60,6 +60,7 @@ object Console {
         initialized = true
         inputCoroutine = coroutine.launch {
             while (true) {
+                if (!this.isActive) break
                 System.out.print(prefix)
                 val input = Scanner(System.`in`).nextLine()
                 if (input != "") coroutine.launch { ConsoleInputEvent(input).call() }
