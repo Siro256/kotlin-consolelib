@@ -1,7 +1,8 @@
 package dev.siro256.kotlin.consolelib
 
 import kotlinx.coroutines.*
-import java.util.*
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 /**
  * ライブラリの基本クラス  使用できる関数が全てここにある
@@ -20,15 +21,6 @@ object Console {
      */
 
     private val coroutine = CoroutineScope(Dispatchers.IO)
-
-    /**
-     * 入力を受け付けるCoroutine
-     *
-     * @author Siro_256
-     * @since 1.1.0
-     */
-
-    private var inputCoroutine: Job? = null
 
     /**
      * すでに初期化されているか否かを判定するための変数
@@ -58,10 +50,15 @@ object Console {
     fun initialize() {
         if (initialized) return
         initialized = true
-        inputCoroutine = coroutine.launch {
+        coroutine.launch {
+            val buffer = BufferedReader(InputStreamReader(System.`in`))
+            System.out.print(prefix)
             while (true) {
-                if (!this.isActive) break
-                System.out.print(prefix)
+                if (!buffer.ready()) {
+                    delay(100)
+                    continue
+                }
+
                 val input = kotlin.io.readLine()
                 if (input != "" && input != null) coroutine.launch { ConsoleInputEvent(input).call() }
             }
@@ -210,23 +207,17 @@ object Console {
     /**
      * 通常のコンソールの処理に割り込み、入力した値を取得する
      * @return 入力された値
-     * 
+     *
      * @author Siro_256
      * @since 1.1.0
      */
 
     fun readLine(): String? {
-        System.out.println("TestMessage1")
         var input: String?
-
-        runBlocking {
-            inputCoroutine?.cancelAndJoin()
-            System.out.println("TestMessage2")
-            input = Scanner(System.`in`).nextLine()
+        runBlocking(coroutine.coroutineContext) {
+            input = kotlin.io.readLine()
             System.out.println(prefix)
-            inputCoroutine?.start()
         }
-        System.out.println("TestMessage3")
         return input
     }
 }
