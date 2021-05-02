@@ -62,8 +62,8 @@ object Console {
             while (true) {
                 if (!this.isActive) break
                 System.out.print(prefix)
-                val input = Scanner(System.`in`).nextLine()
-                if (input != "") coroutine.launch { ConsoleInputEvent(input).call() }
+                val input = kotlin.io.readLine()
+                if (input != "" && input != null) coroutine.launch { ConsoleInputEvent(input).call() }
             }
         }
     }
