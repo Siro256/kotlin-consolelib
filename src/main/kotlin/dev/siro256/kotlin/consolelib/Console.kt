@@ -58,9 +58,9 @@ object Console {
     fun initialize() {
         if (initialized) return
         initialized = true
+        System.out.print(prefix)
         inputCoroutine = coroutine.launch {
             while (true) {
-                System.out.print(prefix)
                 val input = Scanner(System.`in`).nextLine()
                 if (input != "") coroutine.launch { ConsoleInputEvent(input).call() }
             }
@@ -218,15 +218,14 @@ object Console {
         System.out.println("TestMessage1")
         var input: String?
 
-        inputCoroutine?.cancel()
-        System.out.println("TestMessage2")
         runBlocking {
+            inputCoroutine?.cancelAndJoin()
+            System.out.println("TestMessage2")
             input = Scanner(System.`in`).nextLine()
             System.out.println(prefix)
+            inputCoroutine?.start()
         }
         System.out.println("TestMessage3")
-        inputCoroutine?.start()
-        System.out.println("TestMessage4")
         return input
     }
 }
