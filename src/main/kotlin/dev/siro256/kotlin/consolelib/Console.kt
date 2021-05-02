@@ -207,10 +207,13 @@ object Console {
 
     fun readLine(): String? {
         var input: String?
-        runBlocking(coroutine.coroutineContext) {
-            input = Scanner(System.`in`).nextLine()
-            System.out.println(prefix)
+        runBlocking {
+            withContext(coroutine.coroutineContext) {
+                input = Scanner(System.`in`).nextLine()
+                System.out.println(prefix)
+            }
         }
+
         return input
     }
 }
