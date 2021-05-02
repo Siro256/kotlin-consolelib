@@ -58,9 +58,9 @@ object Console {
     fun initialize() {
         if (initialized) return
         initialized = true
-        System.out.print(prefix)
         inputCoroutine = coroutine.launch {
             while (true) {
+                System.out.print(prefix)
                 val input = Scanner(System.`in`).nextLine()
                 if (input != "") coroutine.launch { ConsoleInputEvent(input).call() }
             }
