@@ -206,12 +206,13 @@ object Console {
      */
 
     fun readLine(): String? {
-        var input: String?
+        var input: String? = ""
+
         runBlocking {
-            withContext(coroutine.coroutineContext) {
+            coroutine.launch {
                 input = Scanner(System.`in`).nextLine()
                 System.out.println(prefix)
-            }
+            }.join()
         }
 
         return input
