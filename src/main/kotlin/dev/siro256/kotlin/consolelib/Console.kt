@@ -22,6 +22,15 @@ object Console {
     private val coroutine = CoroutineScope(Dispatchers.IO)
 
     /**
+     * 入力を受け付けるCoroutine
+     *
+     * @author Siro_256
+     * @since 1.1.0
+     */
+
+    private var inputCoroutine: Job? = null
+
+    /**
      * すでに初期化されているか否かを判定するための変数
      *
      * @author Siro_256
@@ -49,7 +58,7 @@ object Console {
     fun initialize() {
         if (initialized) return
         initialized = true
-        coroutine.launch {
+        inputCoroutine = coroutine.launch {
             while (true) {
                 System.out.print(prefix)
                 val input = Scanner(System.`in`).nextLine()
@@ -208,10 +217,14 @@ object Console {
     fun readLine(): String? {
         var input: String?
 
+        inputCoroutine?.cancel()
+
         runBlocking(coroutine.coroutineContext) {
             input = Scanner(System.`in`).nextLine()
             System.out.println(prefix)
         }
+
+        inputCoroutine?.start()
 
         return input
     }
