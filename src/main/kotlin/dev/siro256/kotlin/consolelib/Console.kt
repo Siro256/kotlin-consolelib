@@ -10,7 +10,7 @@ import java.util.*
  * @since 1.0.0
  */
 
-@Suppress("ReplaceJavaStaticMethodWithKotlinAnalog")
+@Suppress("ReplaceJavaStaticMethodWithKotlinAnalog", "unused")
 object Console {
     /**
      * 処理を実行する[CoroutineScope]
