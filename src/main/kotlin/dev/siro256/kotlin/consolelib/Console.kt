@@ -69,8 +69,8 @@ object Console {
                 }
 
                 val input = kotlin.io.readLine()
-                if (input != "" && input != null) coroutine.launch { ConsoleInputEvent(input).call() }
                 System.out.println(prefix)
+                if (input != "" && input != null) coroutine.launch { ConsoleInputEvent(input).call() }
             }
         }
     }
